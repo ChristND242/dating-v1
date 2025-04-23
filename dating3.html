@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlirtConnect | Rencontres Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+      <div class="text-center">
+        <div class="text-5xl font-bold text-white mb-4 pulse">
+          <span
+            class="gradient-text bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-transparent"
+            >Pona Ekolo Dating</span
+          >
+        </div>
+        <p class="text-gray-300 mb-2 loading-message">
+          Chargement de votre expérience de rencontre...
+        </p>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+        <p class="text-gray-400 text-sm mt-4">Made with ❤️ by Pona Ekolo</p>
+      </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container hidden">
+      <!-- Header -->
+      <header
+        class="bg-white shadow-sm py-4 px-6 flex justify-between items-center sticky top-0 z-50"
+      >
+        <div class="flex items-center">
+          <i class="fas fa-fire text-2xl text-red-500 mr-2"></i>
+          <h1 class="text-xl font-bold text-gray-800">Pona Ekolo Dating</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button class="text-gray-600 hover:text-red-500">
+            <i class="fas fa-cog text-xl"></i>
+          </button>
+          <button class="text-gray-600 hover:text-red-500">
+            <i class="fas fa-comment-dots text-xl"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="relative overflow-hidden">
+        <!-- Profiles Tab -->
+        <div class="tab-content active" id="profiles">
+          <div
+            class="max-w-md mx-auto py-4 px-2 relative"
+            style="height: calc(100vh - 120px)"
+          >
+            <!-- Empty State -->
+            <div
+              id="empty-state"
+              class="hidden flex flex-col items-center justify-center h-full text-center p-6"
+            >
+              <div
+                class="w-32 h-32 bg-gray-200 rounded-full mb-4 flex items-center justify-center"
+              >
+                <i class="fas fa-user-slash text-4xl text-gray-400"></i>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-700 mb-2">
+                Plus de profils à afficher
+              </h3>
+              <p class="text-gray-500 mb-6">
+                Nous n'avons plus de profils correspondant à vos critères pour
+                le moment.
+              </p>
+              <button
+                class="gradient-bg text-white px-6 py-2 rounded-full font-medium shadow-md hover:opacity-90 transition"
+              >
+                Rafraîchir
+              </button>
+            </div>
+
+            <!-- Profile Cards Container -->
+            <div id="profile-cards" class="relative w-full h-full">
+              <!-- Profile cards will be inserted here by JavaScript -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div
+              class="absolute bottom-4 left-0 right-0 flex justify-center space-x-6 z-10"
+            >
+              <button
+                id="dislike-btn"
+                class="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:bg-red-50 hover:text-red-400 transition"
+              >
+                <i class="fas fa-times text-2xl"></i>
+              </button>
+              <button
+                id="super-like-btn"
+                class="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center text-blue-400 hover:bg-blue-50 transition"
+              >
+                <i class="fas fa-star text-2xl"></i>
+              </button>
+              <button
+                id="like-btn"
+                class="w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center text-green-400 hover:bg-green-50 transition"
+              >
+                <i class="fas fa-heart text-2xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matches Tab -->
+        <div class="tab-content" id="matches">
+          <div class="max-w-md mx-auto py-4 px-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Vos matchs</h2>
+
+            <div id="matches-container" class="grid grid-cols-2 gap-4">
+              <!-- Matches will be inserted here by JavaScript -->
+            </div>
+
+            <div
+              id="no-matches"
+              class="flex flex-col items-center justify-center py-16 text-center"
+            >
+              <div
+                class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4"
+              >
+                <i class="fas fa-heart text-3xl text-gray-400"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-700 mb-2">
+                Aucun match pour le moment
+              </h3>
+              <p class="text-gray-500">
+                Continuez à swiper pour trouver des personnes qui vous
+                correspondent!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Tab -->
+        <div class="tab-content" id="chat">
+          <div class="max-w-md mx-auto py-4 px-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Messages</h2>
+
+            <div id="chat-list" class="space-y-3">
+              <!-- Chat items will be inserted here by JavaScript -->
+            </div>
+
+            <div
+              id="no-chats"
+              class="flex flex-col items-center justify-center py-16 text-center"
+            >
+              <div
+                class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4"
+              >
+                <i class="fas fa-comments text-3xl text-gray-400"></i>
+              </div>
+              <h3 class="text-lg font-medium text-gray-700 mb-2">
+                Aucun message
+              </h3>
+              <p class="text-gray-500">
+                Lorsque vous aurez un match, vos conversations apparaîtront ici.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content" id="profile">
+          <div class="max-w-md mx-auto py-4 px-4">
+            <div class="flex items-center mb-6">
+              <div
+                class="w-16 h-16 bg-gray-300 rounded-full overflow-hidden mr-4"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/ChristND242/PE-logo/refs/heads/main/png/logo-white.png"
+                  alt="Profile"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h2 class="text-xl font-bold">Big Homie</h2>
+                <p class="text-gray-500">Brazzaville, 38 ans</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+              <h3 class="font-medium text-gray-800 mb-2">À propos de moi</h3>
+              <p class="text-gray-600">
+                Je suis un passionné de voyages, de cuisine et de photographie.
+                J'aime les soirées entre amis autant que les moments calmes à la
+                maison.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+              <h3 class="font-medium text-gray-800 mb-2">Intérêts</h3>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm"
+                  >Voyages</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm"
+                  >Photographie</span
+                >
+                <span
+                  class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm"
+                  >Cuisine</span
+                >
+                <span
+                  class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm"
+                  >Randonnée</span
+                >
+                <span
+                  class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm"
+                  >Cinéma</span
+                >
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm p-4">
+              <h3 class="font-medium text-gray-800 mb-2">Paramètres</h3>
+              <div class="space-y-3">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100"
+                >
+                  <span class="text-gray-600">Notifications</span>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      value=""
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"
+                    ></div>
+                  </label>
+                </div>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100"
+                >
+                  <span class="text-gray-600">Localisation</span>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      value=""
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"
+                    ></div>
+                  </label>
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600">Mode sombre</span>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input type="checkbox" value="" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="w-full gradient-bg text-white py-3 rounded-xl font-medium mt-6 shadow-md hover:opacity-90 transition"
+            >
+              Modifier mon profil
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav
+        class="bg-white shadow-lg fixed bottom-0 left-0 right-0 py-3 px-6 flex justify-around items-center z-50"
+      >
+        <button
+          class="nav-item active flex flex-col items-center text-red-500"
+          data-tab="profiles"
+        >
+          <i class="fas fa-home text-xl mb-1"></i>
+          <span class="text-xs">Découvrir</span>
+        </button>
+        <button
+          class="nav-item flex flex-col items-center text-gray-500"
+          data-tab="matches"
+        >
+          <i class="fas fa-heart text-xl mb-1"></i>
+          <span class="text-xs">Matchs</span>
+        </button>
+        <button
+          class="nav-item flex flex-col items-center text-gray-500"
+          data-tab="chat"
+        >
+          <i class="fas fa-comment-dots text-xl mb-1"></i>
+          <span class="text-xs">Messages</span>
+        </button>
+        <button
+          class="nav-item flex flex-col items-center text-gray-500"
+          data-tab="profile"
+        >
+          <i class="fas fa-user text-xl mb-1"></i>
+          <span class="text-xs">Profil</span>
+        </button>
+      </nav>
+
+      <!-- Match Modal -->
+      <div
+        class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 match-modal"
+      >
+        <div class="bg-white rounded-2xl overflow-hidden w-full max-w-md mx-4">
+          <div class="gradient-bg py-6 px-4 text-center">
+            <h2 class="text-2xl font-bold text-white mb-2">C'est un match!</h2>
+            <p class="text-white opacity-90">
+              Vous et <span class="font-semibold match-name">Julie</span> avez
+              aimé vos profils respectifs
+            </p>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-center -mt-16 mb-6">
+              <div class="relative">
+                <div
+                  class="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg"
+                >
+                  <img
+                    id="match-user-img"
+                    src="https://raw.githubusercontent.com/ChristND242/PE-logo/refs/heads/main/png/logo-white.png"
+                    alt="Match"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  class="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg absolute -right-10 -bottom-4"
+                >
+                  <img
+                    src="https://raw.githubusercontent.com/ChristND242/PE-logo/refs/heads/main/png/logo-white.png"
+                    alt="You"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                id="keep-swiping"
+                class="flex-1 bg-gray-100 text-gray-800 py-3 rounded-lg font-medium hover:bg-gray-200 transition"
+              >
+                Continuer
+              </button>
+              <button
+                id="start-chat"
+                class="flex-1 gradient-bg text-white py-3 rounded-lg font-medium hover:opacity-90 transition"
+              >
+                Discuter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Interface -->
+      <div class="chat-container fixed inset-0 bg-white z-50">
+        <div class="h-full flex flex-col">
+          <!-- Chat Header -->
+          <div
+            class="bg-white py-4 px-4 border-b border-gray-200 flex items-center"
+          >
+            <button id="back-to-matches" class="mr-3 text-gray-600">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+              <img
+                id="chat-user-img"
+                src="https://raw.githubusercontent.com/ChristND242/PE-logo/refs/heads/main/png/logo-white.png"
+                alt="Chat User"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <h3 id="chat-user-name" class="font-medium">Julie Martin</h3>
+              <p class="text-xs text-gray-500">En ligne</p>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+            <!-- Messages will be inserted here by JavaScript -->
+          </div>
+
+          <!-- Message Input -->
+          <div class="bg-white border-t border-gray-200 p-3">
+            <div class="flex items-center">
+              <button
+                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 mr-2"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+              <input
+                type="text"
+                placeholder="Écrivez un message..."
+                class="flex-1 border border-gray-300 rounded-full py-2 px-4 focus:outline-none focus:border-red-400"
+              />
+              <button
+                class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center text-white ml-2"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
